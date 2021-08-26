@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+ <meta charset='UTF-8'>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+ <style>
+  div,body,ul,li{
+   margin: 0; padding: 0; box-sizing: border-box;
+  }
+  
+  body{
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   overflow: hidden;
+   background: #555;
+  }
+  
+  .wrap{
+   width: 200px;
+   height: 300px;
+   background: #333;
+   position: relative;
+   border-radius: 10px;
+   border: solid 5px #777;
+  }
+  
+  .wrap div{
+   width: 20px;
+   height: 115px;
+   background: rgba(111,111,111,.25);
+   margin: 5px;
+   position: absolute;
+   border-radius: 10px;
+  }
+  .wrap div.active{
+   background: red;
+   box-shadow:  0 0 10px red;
+  }
+  
+  .wrap .a{
+   left: 80px;
+   top: -45px;
+   transform: rotate(90deg);
+  }
+  .wrap .b{
+   right: 10px;
+   top: 20px;
+  }
+  .wrap .c{
+   right: 10px;
+   bottom: 20px;
+  }
+  .wrap .d{
+   left: 80px;
+   bottom: -45px;
+   transform: rotate(90deg);
+  }
+  .wrap .e{
+   left: 10px;
+   bottom: 20px;
+  }
+  .wrap .f{
+   left: 10px;
+   top: 20px;
+  }
+  .wrap .g{
+   left: 80px;
+   top: 85px;
+   transform: rotate(90deg);
+  }
+  
+ </style>
+</head>
+<body>
+ 
+ <div class="wrap">
+ 
+   <div class="a"></div>
+   <div class="b"></div>
+   <div class="c"></div>
+   <div class="d"></div>
+   <div class="e"></div>
+   <div class="f"></div>
+   <div class="g"></div>
+ 
+ </div>
+ 
+ 
+ 
+ <script>
+ 
+  var a = document.querySelector(".a");
+  var b = document.querySelector(".b");
+  var c = document.querySelector(".c");
+  var d = document.querySelector(".d");
+  var e = document.querySelector(".e");
+  var f = document.querySelector(".f");
+  var g = document.querySelector(".g");
+  
+  var arr = [a,b,c,d,e,f,g];
+  
+  var on = [
+       [1,1,1,1,1,1,0],
+       [0,1,1,0,0,0,0],
+       [1,1,0,1,1,0,1],
+       [1,1,1,1,0,0,1],
+       [0,1,1,0,0,1,1],
+       [1,0,1,1,0,1,1],
+       [1,0,1,1,1,1,1],
+       [1,1,1,0,0,0,0],
+       [1,1,1,1,1,1,1],
+       [1,1,1,1,0,1,1], //9
+       
+       [1,1,1,0,1,1,1], //A
+       [0,0,1,1,1,1,1],
+       [1,0,0,1,1,1,0],
+       [0,1,1,1,1,0,1],
+       [1,0,0,1,1,1,1],
+       [1,0,0,0,1,1,1],
+       ]
+ 
+    add = 0;
+    speed = 600;	// adjust speed
+ 
+  function play(){
+      
+      for (let i=0; i<arr.length; i++){
+          
+          c_name = arr[i].className
+          p = c_name + on[add][i];
+          if (p[1] === '1'){
+            
+            arr[i].classList.add('active')
+          
+          }
+      }
+      setTimeout(rm,speed-5);
+      add++;
+      if (add >= on.length){
+          //clearInterval(timer)
+          add = 0
+      }
+  }
+  
+  timer = setInterval(play,speed)
+  
+  function rm(){
+      for (let i=0; i<arr.length; i++){
+          arr[i].classList.remove('active');
+      }
+  }
+  
+  
+ </script>
+</body>
+</html>
